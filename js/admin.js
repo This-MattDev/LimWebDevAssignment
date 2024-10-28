@@ -82,6 +82,7 @@ $(document).ready(function(){
                     ordering: false,
                 });
 
+                // Bind custom input to DataTable search
                 $('#custom-search').on('keyup', function() {
                     table.search(this.value).draw()
                 });
@@ -96,7 +97,6 @@ $(document).ready(function(){
                     e.preventDefault()
                     addProduct()
                 })
-
             }
         })
     }
