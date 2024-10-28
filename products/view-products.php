@@ -1,3 +1,17 @@
+<?php
+session_start(); // Start the session
+
+// Check if the request is made via AJAX
+if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest') {
+    // If not an AJAX request, redirect to error.php
+    ?>
+        <h1>This is a Restricted Page</h1>
+    <?php
+    exit(); // Stop further execution
+}
+
+// Your existing HTML content can go below this
+?>
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -14,7 +28,6 @@
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <?php
                             require_once '../classes/product.class.php';
-                            session_start();
                             $productObj = new Product();
                         ?>
                         <div class="d-flex justify-content-center align-items-center">
@@ -58,7 +71,6 @@
                                     <th class="text-start">Price</th>
                                     <th class="text-center">Total Stocks</th>
                                     <th class="text-center">Available Stocks</th>
-                                    <th class="text-center">Image</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -89,9 +101,6 @@
                                             ">
                                                 <?= $available ?>
                                             </span>
-                                        </td>
-                                        <td class="text-center">
-                                            <img src="<?= $arr['file_path'] ?>" alt="thumbnail" class="img-fluid product-thumbnail">
                                         </td>
                                         <td class="text-nowrap">
                                             <a href="../stocks/stocks.php?id=<?= $arr['id'] ?>" class="btn btn-sm btn-outline-primary me-1">Stock In/Out</a>
